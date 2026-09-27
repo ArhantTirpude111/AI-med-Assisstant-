@@ -1,0 +1,68 @@
+# =============================================================================
+# MedIntel AI — non-secret runtime configuration.
+# These are DEFAULTS. Override via environment variables (MEDINTEL_*) or .env.
+# Precedence (low -> high): this file  <  env vars  <  .env
+# =============================================================================
+
+app_name: "MedIntel AI"
+environment: "development"   # development | staging | production
+log_level: "INFO"
+log_json: false
+
+llm:
+  provider: "openai"         # openai | local | mock
+  model: "gpt-4o-mini"
+  # Free, offline model used when provider == "local" (runs on CPU via transformers).
+  # Larger = better quality, slower: Qwen2.5-1.5B-Instruct, Qwen2.5-3B-Instruct, etc.
+  local_model: "Qwen/Qwen2.5-0.5B-Instruct"
+  # Optional OpenAI-compatible endpoint (e.g. Groq free tier):
+  # base_url: "https://api.groq.com/openai/v1"
+  base_url: null
+  temperature: 0.1           # low temperature -> factual, deterministic
+  max_tokens: 1024
+  timeout_seconds: 60
+  max_retries: 3
+
+embeddings:
+  provider: "openai"         # openai | huggingface | hash
+  model: "text-embedding-3-small"
+  hf_model: "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 1536            # informational; auto-detected at runtime
+  batch_size: 64
+
+chunking:
+  strategy: "recursive"      # recursive | sentence
+  chunk_size: 900            # characters
+  chunk_overlap: 150
+  respect_page_boundaries: true
+
+retrieval:
+  top_k: 5                   # chunks injected into the prompt
+  fetch_k: 20                # candidates fetched before re-ranking
+  min_confidence: 0.35       # below this -> refuse to answer
+  max_context_chars: 8000
+  dedupe: true
+
+ocr:
+  enabled: true
+  language: "eng"
+  dpi: 300
+  # tesseract_cmd: "C:/Program Files/Tesseract-OCR/tesseract.exe"
+  # A page is treated as "scanned" if native extraction yields fewer chars:
+  min_native_chars_per_page: 40
+
+ner:
+  enabled: true
+  backend: "auto"            # auto | scispacy | rules
+  scispacy_model: "en_core_sci_sm"
+
+guardrails:
+  attach_disclaimer: true
+  detect_emergencies: true
+  refuse_below_confidence: true
+
+paths:
+  data_dir: "data"
+  upload_dir: "data/uploads"
+  index_dir: "data/index"
+  db_url: "sqlite:///data/medintel.db"

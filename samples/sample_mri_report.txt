@@ -1,0 +1,29 @@
+RIVERSIDE IMAGING CENTER
+MRI of the Abdomen — Radiology Report
+
+Patient: J. Doe            MRN: 00481923
+Date of exam: 2025-04-02
+Referring physician: Dr. A. Mehta
+
+CLINICAL INDICATION
+Elevated liver enzymes and right upper-quadrant pain. Evaluate hepatic parenchyma.
+
+TECHNIQUE
+Multiplanar, multisequence MRI of the abdomen was performed without and with
+intravenous contrast, including in-phase and out-of-phase chemical shift imaging.
+
+FINDINGS
+Liver: Diffuse signal dropout on out-of-phase imaging consistent with moderate
+hepatic steatosis. No focal hepatic mass or suspicious lesion. No intrahepatic
+biliary ductal dilatation.
+Gallbladder: Normal. No cholelithiasis.
+Pancreas, spleen, adrenal glands: Unremarkable.
+Kidneys: No hydronephrosis or solid renal mass.
+
+IMPRESSION
+1. Moderate diffuse hepatic steatosis.
+2. No focal liver lesion or biliary obstruction.
+
+RECOMMENDATIONS
+Correlate with liver function tests and metabolic risk factors.
+Consider follow-up imaging in 6-12 months if clinically indicated.

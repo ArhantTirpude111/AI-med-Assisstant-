@@ -1,0 +1,39 @@
+# --- Secrets & env ---
+.env
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Data & generated artifacts (PHI must never be committed) ---
+data/
+!data/.gitkeep
+*.faiss
+*.sqlite
+*.db
+medintel.db
+*.log
+
+# --- Streamlit ---
+.streamlit/secrets.toml
+
+# --- Knowledge graph render output ---
+*.kg.html
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

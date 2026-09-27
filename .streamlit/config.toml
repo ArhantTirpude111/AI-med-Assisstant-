@@ -1,0 +1,15 @@
+# MedIntel AI — Streamlit theme (healthcare palette)
+[theme]
+primaryColor = "#0e7c86"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f7f8"
+textColor = "#1f2937"
+font = "sans serif"
+
+[server]
+headless = true
+maxUploadSize = 50          # MB — generous for multi-page scanned PDFs
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false

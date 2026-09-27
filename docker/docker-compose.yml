@@ -1,0 +1,47 @@
+# =============================================================================
+# MedIntel AI — local / single-node deployment
+#   docker compose -f docker/docker-compose.yml up --build
+# =============================================================================
+services:
+  medintel:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: medintel-ai:latest
+    container_name: medintel-ai
+    ports:
+      - "8501:8501"
+    environment:
+      # Secrets/config are read from .env (see .env.example). Override here too:
+      MEDINTEL_LLM__PROVIDER: ${MEDINTEL_LLM__PROVIDER:-openai}
+      MEDINTEL_EMBEDDINGS__PROVIDER: ${MEDINTEL_EMBEDDINGS__PROVIDER:-openai}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      MEDINTEL_OCR__ENABLED: "true"
+      MEDINTEL_PATHS__DB_URL: ${MEDINTEL_PATHS__DB_URL:-sqlite:///data/medintel.db}
+    env_file:
+      - ../.env
+    volumes:
+      # Persist uploads, FAISS index, and the database across restarts.
+      - medintel-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # --- Optional: Postgres backend (swap paths.db_url to use it) --------------
+  # postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_USER: medintel
+  #     POSTGRES_PASSWORD: change-me
+  #     POSTGRES_DB: medintel
+  #   volumes:
+  #     - medintel-pg:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+volumes:
+  medintel-data:
+  # medintel-pg:
